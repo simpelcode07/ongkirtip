@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONGKIR-TIP</title>
+  <!-- Link ke CSS Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Coolvetica, sans-serif;
+      padding: 20px;
+      width: 300px; /* Set lebar popup */
+      height: auto; /* Tinggi otomatis menyesuaikan konten */
+      background-image: url("bg.jpg");
+      background-size: cover;
+      }
+    #result {
+      margin-top: 10px;
+    }
+    #menuHargaTambahan {
+      margin-top: 10px; /* Mengurangi jarak atas menu */
+    }
+    .menu-item {
+      font-size: 13px; /* Mengurangi ukuran font */
+      margin-bottom: 5px; /* Mengurangi jarak antar item */
+    }
+    .form-check-label {
+      font-size: 14px; /* Mengurangi ukuran font pada label */
+    }
+    .badge {
+      font-size: 10px; /* Mengurangi ukuran font pada badge */
+    }
+    .button-copy {
+      font-size: 10px; /* Mengurangi ukuran font */
+      margin-bottom: 5px; /* Mengurangi jarak antar item */
+    }
+    .rincian-ongkir {
+      font-size: 11px;
+    }
+    footer{
+      font-size: 12px;
+      font-family: monospace;
+      margin-top: 20px;
+    }
+    footer p:hover {
+      color: red;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3 align="center" style="color: red;" class="mb-4">ONGKIR-TIP</h3>
+    <p align="center" style="margin-top: -20px;">Kalkulator Ongkir TITIP</p>
+    <div class="form-group">
+
+      <label for="distanceInput">Masukkan Jarak (km):</label>
+      <input type="number" id="distanceInput" class="form-control" step="0.1" min="0" placeholder="Contoh: 5.2">
+    </div>
+    <button id="calculateBtn" class="btn btn-danger">Hitung Ongkir</button>
+    <button id="copyBtn" class="btn btn-primary ml-2">Copy</button>
+    <div id="result" class="mt-3"></div>
+
+    <!-- Menu Biaya Tambahan -->
+    <div id="menuHargaTambahan">
+      <h5 class="mt-4">Biaya Layanan:</h5>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="hujan">
+        <label class="form-check-label" for="hujan">Hujan <span class="badge badge-success">+3000</span></label>
+      </div>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="minimarket">
+        <label class="form-check-label" for="minimarket">TITIP-Belanja (Alfa-Indo)<span class="badge badge-success">+3000</span></label>
+      </div>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="pasar">
+        <label class="form-check-label" for="pasar">TITIP-Belanja Pasar<span class="badge badge-success">+5000</span></label>
+      </div>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="kfc">
+        <label class="form-check-label" for="kfc">TITIP-Makanan (KFC)<span class="badge badge-success">+2000</span></label>
+      </div>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="insentif_multiple">
+        <label class="form-check-label" for="insentif_multiple">Multiple Order<span class="badge badge-success">+2000</span></label>
+      </div>
+      <div class="form-group form-check menu-item">
+        <input type="checkbox" class="form-check-input" id="insentif_rs">
+        <label class="form-check-label" for="insentif_rs">Insentif RS<span class="badge badge-success">+2000</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link ke JS Bootstrap dan jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+  
+<footer>
+  <p align="center">made by ❤ @xcdenun07</p>
+</footer>
+
+</body>
+</html>
+
