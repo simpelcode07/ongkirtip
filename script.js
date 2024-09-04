@@ -1,8 +1,3 @@
-    // Add event listeners and functionality
-    addPopupFunctionality();
-  });
-}
-
 function addPopupFunctionality() {
   document.getElementById('calculateBtn').addEventListener('click', () => {
     const distanceInput = document.getElementById('distanceInput').value;
