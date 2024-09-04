@@ -1,34 +1,3 @@
-let popupContainer = null;
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "showPopup") {
-    showPopup();
-  }
-});
-
-function showPopup() {
-  if (popupContainer) return;
-  popupContainer = document.createElement('div');
-  const bgImageUrl = chrome.runtime.getURL('bg.jpg');
-  popupContainer.style.cssText = `
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000000;
-    width: 300px;
-    height: auto;
- background-image: url("${bgImageUrl}");
-    background-size: cover;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  `;
-
-  chrome.runtime.sendMessage({action: "getPopupContent"}, response => {
-    popupContainer.innerHTML = response.content;
-    document.body.appendChild(popupContainer);
-    
     // Add event listeners and functionality
     addPopupFunctionality();
   });
