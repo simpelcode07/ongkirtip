@@ -3,43 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONGKIR-TIP</title>
+  <title>TITIP Indonesia Ongkir Calculator</title>
   <!-- Link ke CSS Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <script src="script.js"></script>
   <style>
     body {
       font-family: Coolvetica, sans-serif;
-      padding: 20px;
-      width: 300px; /* Set lebar popup */
-      height: auto; /* Tinggi otomatis menyesuaikan konten */
       background-image: url("bg.jpg");
       background-size: cover;
-      }
+      padding: 20px;
+    }
     #result {
       margin-top: 10px;
     }
     #menuHargaTambahan {
-      margin-top: 10px; /* Mengurangi jarak atas menu */
+      margin-top: 10px;
     }
     .menu-item {
-      font-size: 13px; /* Mengurangi ukuran font */
-      margin-bottom: 5px; /* Mengurangi jarak antar item */
+      font-size: 13px;
+      margin-bottom: 5px;
     }
     .form-check-label {
-      font-size: 14px; /* Mengurangi ukuran font pada label */
+      font-size: 14px;
     }
     .badge {
-      font-size: 10px; /* Mengurangi ukuran font pada badge */
+      font-size: 10px;
     }
     .button-copy {
-      font-size: 10px; /* Mengurangi ukuran font */
-      margin-bottom: 5px; /* Mengurangi jarak antar item */
+      font-size: 10px;
+      margin-bottom: 5px;
     }
     .rincian-ongkir {
       font-size: 11px;
     }
-    footer{
+    footer {
       font-size: 12px;
       font-family: monospace;
       margin-top: 20px;
@@ -47,9 +44,6 @@
     footer p:hover {
       color: red;
     }
-
-
-
   </style>
 </head>
 <body>
@@ -57,7 +51,6 @@
     <h3 align="center" style="color: red;" class="mb-4">ONGKIR-TIP</h3>
     <p align="center" style="margin-top: -20px;">Kalkulator Ongkir TITIP</p>
     <div class="form-group">
-
       <label for="distanceInput">Masukkan Jarak (km):</label>
       <input type="number" id="distanceInput" class="form-control" step="0.1" min="0" placeholder="Contoh: 5.2">
     </div>
@@ -74,23 +67,23 @@
       </div>
       <div class="form-group form-check menu-item">
         <input type="checkbox" class="form-check-input" id="minimarket">
-        <label class="form-check-label" for="minimarket">TITIP-Belanja (Alfa-Indo)<span class="badge badge-success">+3000</span></label>
+        <label class="form-check-label" for="minimarket">TITIP-Belanja (Alfa-Indo) <span class="badge badge-success">+3000</span></label>
       </div>
       <div class="form-group form-check menu-item">
         <input type="checkbox" class="form-check-input" id="pasar">
-        <label class="form-check-label" for="pasar">TITIP-Belanja Pasar<span class="badge badge-success">+5000</span></label>
+        <label class="form-check-label" for="pasar">TITIP-Belanja Pasar <span class="badge badge-success">+5000</span></label>
       </div>
       <div class="form-group form-check menu-item">
         <input type="checkbox" class="form-check-input" id="kfc">
-        <label class="form-check-label" for="kfc">TITIP-Makanan (KFC)<span class="badge badge-success">+2000</span></label>
+        <label class="form-check-label" for="kfc">TITIP-Makanan (KFC) <span class="badge badge-success">+2000</span></label>
       </div>
       <div class="form-group form-check menu-item">
         <input type="checkbox" class="form-check-input" id="insentif_multiple">
-        <label class="form-check-label" for="insentif_multiple">Multiple Order<span class="badge badge-success">+2000</span></label>
+        <label class="form-check-label" for="insentif_multiple">Multiple Order <span class="badge badge-success">+2000</span></label>
       </div>
       <div class="form-group form-check menu-item">
         <input type="checkbox" class="form-check-input" id="insentif_rs">
-        <label class="form-check-label" for="insentif_rs">Insentif RS<span class="badge badge-success">+2000</span></label>
+        <label class="form-check-label" for="insentif_rs">Insentif RS <span class="badge badge-success">+2000</span></label>
       </div>
     </div>
   </div>
@@ -99,12 +92,142 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-  
-<footer>
-  <p align="center">made by ❤ @xcdenun07</p>
-</footer>
+  <script>
+    document.getElementById('calculateBtn').addEventListener('click', () => {
+      const distanceInput = document.getElementById('distanceInput').value;
+      const distance = parseFloat(distanceInput);
 
+      if (!isNaN(distance) && distance > 0) {
+        let ongkirDasar = calculateOngkir(distance);
+        let ongkir = ongkirDasar;
+        let biayaTambahanDetails = "";
+
+        if (document.getElementById('hujan').checked) {
+          ongkir += 3000;
+          biayaTambahanDetails += "Hujan: Rp 3.000<br>";
+        }
+        if (document.getElementById('minimarket').checked) {
+          ongkir += 3000;
+          biayaTambahanDetails += "TITIP-Belanja (Alfa-Indo): Rp 3.000<br>";
+        }
+        if (document.getElementById('pasar').checked) {
+          ongkir += 5000;
+          biayaTambahanDetails += "TITIP-Belanja Pasar: Rp 5.000<br>";
+        }
+        if (document.getElementById('kfc').checked) {
+          ongkir += 2000;
+          biayaTambahanDetails += "TITIP-Makanan (KFC): Rp 2.000<br>";
+        }
+        if (document.getElementById('insentif_multiple').checked) {
+          ongkir += 2000;
+          biayaTambahanDetails += "Multiple Order: Rp 2.000<br>";
+        }
+        if (document.getElementById('insentif_rs').checked) {
+          ongkir += 2000;
+          biayaTambahanDetails += "Insentif RS: Rp 2.000<br>";
+        }
+
+        document.getElementById('result').innerHTML = `
+          <div class="alert alert-success" role="alert">
+            <b>*Total Ongkir: Rp ${ongkir.toLocaleString('id-ID')}*</b><br><br>
+            <div class="rincian-ongkir">
+              <strong>Rincian Biaya:</strong><br>
+              Ongkir Dasar: Rp ${ongkirDasar.toLocaleString('id-ID')}<br>
+              ${biayaTambahanDetails || "Tidak ada biaya tambahan"}
+            </div>
+          </div>`;
+        window.ongkirText = `Total Ongkir: Rp ${ongkir.toLocaleString('id-ID')}`;
+      } else {
+        document.getElementById('result').innerHTML = `<div class="alert alert-danger" role="alert">Silakan masukkan jarak yang valid.</div>`;
+      }
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const pesan = `Halo kak, Ini ya Ongkirnya:\n\n💰 ${window.ongkirText} \n\n*Balas 'Ya' jika kakak bersedia*, Kemudian kami teruskan ke driver ya pesanannya kak.`;
+      copyToClipboard(pesan);
+    });
+
+ // Awal Fungsi Ongkir
+function calculateOngkir(jarak) {
+  let ongkir = 0;
+  if (jarak <= 1.0) {
+    ongkir = 5000;
+  } else if (jarak <= 2.5) {
+    ongkir = 7000;
+  } else if (jarak <= 3.5) {
+    ongkir = 7000;
+  } else if (jarak <= 4.5) {
+    ongkir = 8000;
+  } else if (jarak <= 5.5) {
+    ongkir = 10000;
+  } else if (jarak <= 6.5) {
+    ongkir = 12000;
+  } else if (jarak <= 7.5) {
+    ongkir = 13000;
+  } else if (jarak <= 8.5) {
+    ongkir = 14000;
+  } else if (jarak <= 9.5) {
+    ongkir = 15000;
+  } else if (jarak <= 10.5) {
+    ongkir = 16000;
+  } else if (jarak <= 11.5) {
+    ongkir = 17000;
+  } else if (jarak <= 12.5) {
+    ongkir = 18000;
+  } else if (jarak <= 13.5) {
+    ongkir = 19000;
+  } else if (jarak <= 14.5) {
+    ongkir = 20000;
+  } else if (jarak <= 15.5) {
+    ongkir = 21000;
+  } else if (jarak <= 16.5) {
+    ongkir = 22000;
+  } else if (jarak <= 17.5) {
+    ongkir = 23000;
+  } else if (jarak <= 18.5) {
+    ongkir = 24000;
+  } else if (jarak <= 19.5) {
+    ongkir = 25000;
+  } else if (jarak <= 20.5) {
+    ongkir = 26000;
+  } else if (jarak <= 21.5) {
+        ongkir = 27000;
+    } else if (jarak <= 22.5) {
+        ongkir = 28000;
+    } else if (jarak <= 23.5) {
+        ongkir = 29000;
+    } else if (jarak <= 24.5) {
+        ongkir = 30000;
+    } else if (jarak <= 25.5) {
+        ongkir = 31000;
+    } else if (jarak <= 26.5) {
+        ongkir = 32000;
+    } else if (jarak <= 27.5) {
+        ongkir = 33000;
+    } else if (jarak <= 28.5) {
+        ongkir = 34000;
+    } else if (jarak <= 29.5) {
+        ongkir = 35000;
+  }
+  return ongkir;
+}
+// Akhir Fungsi Ongkir
+
+    function copyToClipboard(text) {
+      const tempInput = document.createElement('textarea');
+      tempInput.style.position = 'fixed';
+      tempInput.style.opacity = '0';
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      alert('Teks berhasil disalin ke clipboard!');
+    }
+  </script>
+
+  <footer>
+    <p align="center">TITIP Indonesia © 2024. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
-
